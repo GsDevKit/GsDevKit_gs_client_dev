@@ -29,12 +29,13 @@ if [ "${GS_HOME}x" = "x" ] ; then
   echo "the GS_HOME environment variable needs to be defined"; exit 1
 fi
 
-if [ "${GS_GS_CLIENT_DEV}x" -ne "x" ] ; then
-   ${GS_GS_CLIENT_DEV}/bin/installClientGciLibraries $*
-fi
+pushd $GS_GS_CLIENT_DEV_CLIENTS >& /dev/null
 
-if [ "${GS_GS_SERVER}x" -ne "x" ];
-   ${GS_GS_SERVER}/bin/installClientGciLibraries $*
-fi
+  for clientName in $(find . -type d)
+  do
+    ${GS_GS_CLIENT_DEV_CLIENTS}/clientName/installClientGciLibraries $vers
+  done
+
+popd >& /dev/null
 
 echo "...finished $(basename $0)"
