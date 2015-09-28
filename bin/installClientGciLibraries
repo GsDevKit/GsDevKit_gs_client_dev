@@ -30,6 +30,19 @@ if [ "${GS_HOME}x" = "x" ] ; then
   echo "the GS_HOME environment variable needs to be defined"; exit 1
 fi
 
+while getopts "h" OPT ; do
+  case "$OPT" in
+    h) usage; exit 0;;
+    *) usage; exit 1;;
+  esac
+done
+shift $(($OPTIND - 1))
+
+if [ $# -lt 1 ]; then
+  usage; exit 1
+fi
+vers=$1
+
 pushd $GS_GS_CLIENT_DEV_CLIENTS >& /dev/null
 
   for clientName in $(find . -type d)
