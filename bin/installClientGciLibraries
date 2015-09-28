@@ -34,7 +34,9 @@ pushd $GS_GS_CLIENT_DEV_CLIENTS >& /dev/null
 
   for clientName in $(find . -type d)
   do
-    ${GS_GS_CLIENT_DEV_CLIENTS}/$clientName/installClientGciLibraries $vers
+    if [ "$clientName" != "." ] ; then
+      ${GS_GS_CLIENT_DEV_CLIENTS}/$clientName/installClientGciLibraries $vers
+    fi
   done
 
 popd >& /dev/null
