@@ -43,12 +43,12 @@ if [ $# -lt 1 ]; then
 fi
 vers=$1
 
-pushd $GS_GS_CLIENT_DEV_CLIENTS >& /dev/null
+pushd $GS_CLIENT_DEV_CLIENTS >& /dev/null
 
   for clientName in $(find . -maxdepth 1 -type d)
   do
     if [ "$clientName" != "." ] ; then
-      ${GS_GS_CLIENT_DEV_CLIENTS}/$clientName/installClientGciLibraries $vers
+      ${GS_CLIENT_DEV_CLIENTS}/$clientName/installClientGciLibraries $vers
     fi
   done
 
