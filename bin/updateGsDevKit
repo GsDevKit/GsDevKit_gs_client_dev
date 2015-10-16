@@ -32,10 +32,10 @@ source ${GS_HOME}/bin/defGsDevKit.env
 
 source ${GS_HOME}/bin/private/gitFunctions
 
-updateClone master "$GS_CLIENT_DEV"
+updateClone $GSDEVKIT_DEV_GIT_CHECKOUT $GSDEVKIT_DEV_GIT_REMOTE "$GS_CLIENT_DEV"
 
 if [ -d "$GS_CLIENT_DEV/todeClient" ]; then
-  updateClone master "$GS_CLIENT_DEV/todeClient"
+  updateClone $GSDEVKIT_TODE_CLIENT_GIT_CHECKOUT $GSDEVKIT_TODE_CLIENT_GIT_REMOTE "$GS_CLIENT_DEV/todeClient"
 fi
 
 pushd $GS_CLIENT_DEV_CLIENTS >& /dev/null
