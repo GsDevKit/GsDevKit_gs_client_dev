@@ -6,7 +6,7 @@
 #=========================================================================
 
 theArgs="$*"
-source ${GS_HOME}/bin/private/shFeedback
+source "${GS_HOME}/bin/private/shFeedback"
 start_banner
 
 usage() {
@@ -39,12 +39,12 @@ if [ $# -lt 1 ]; then
 fi
 vers=$1
 
-pushd $GS_CLIENT_DEV_CLIENTS >& /dev/null
+pushd "$GS_CLIENT_DEV_CLIENTS" >& /dev/null
 
   for clientName in $(find . -maxdepth 1 -type d)
   do
     if [ "$clientName" != "." ] ; then
-      ${GS_CLIENT_DEV_CLIENTS}/$clientName/installClientGciLibraries $vers
+      "${GS_CLIENT_DEV_CLIENTS}/$clientName/installClientGciLibraries" $vers
     fi
   done
 

@@ -6,7 +6,7 @@
 #=========================================================================
 
 theArgs="$*"
-source ${GS_HOME}/bin/private/shFeedback
+source "${GS_HOME}/bin/private/shFeedback"
 start_banner
 
 usage() {
@@ -27,22 +27,22 @@ HELP
 if [ "${GS_CLIENT_DEV}x" = "x" ] ; then
   exit_1_banner "the GS_CLIENT_DEV environment variable needs to be defined"
 fi
-source ${GS_HOME}/bin/defGsDevKit.env
+source "${GS_HOME}/bin/defGsDevKit.env"
 
-source ${GS_HOME}/bin/private/gitFunctions
+source "${GS_HOME}/bin/private/gitFunctions"
 
-updateClone $GSDEVKIT_DEV_GIT_CHECKOUT $GSDEVKIT_DEV_GIT_REMOTE "$GS_CLIENT_DEV"
+updateClone "$GSDEVKIT_DEV_GIT_CHECKOUT" "$GSDEVKIT_DEV_GIT_REMOTE" "$GS_CLIENT_DEV"
 
 if [ -d "$GS_CLIENT_DEV/todeClient" ]; then
-  updateClone $GSDEVKIT_TODE_CLIENT_GIT_CHECKOUT $GSDEVKIT_TODE_CLIENT_GIT_REMOTE "$GS_CLIENT_DEV/todeClient"
+  updateClone "$GSDEVKIT_TODE_CLIENT_GIT_CHECKOUT" "$GSDEVKIT_TODE_CLIENT_GIT_REMOTE" "$GS_CLIENT_DEV/todeClient"
 fi
 
-pushd $GS_CLIENT_DEV_CLIENTS >& /dev/null
+pushd "$GS_CLIENT_DEV_CLIENTS" >& /dev/null
 
   for clientName in $(find . -maxdepth 1 -type d)
   do
     if [ "$clientName" != "." ] ; then
-      ${GS_CLIENT_DEV_CLIENTS}/$clientName/updateGsDevKit $*
+      "${GS_CLIENT_DEV_CLIENTS}/$clientName/updateGsDevKit" $*
     fi
   done
 
