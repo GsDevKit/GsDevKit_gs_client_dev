@@ -11,24 +11,28 @@ start_banner
 
 usage() {
   cat <<HELP
-USAGE: $(basename $0) [-h] <gemstone-version>
+USAGE: $(basename $0) [-h] [-f] <gemstone-version>
 
 Notification that a new version of GemStone has been installed. Copy the GCI 
 libraries to the approprate place for the various clients
 
 OPTIONS
   -h display help
+  -f force update of GCI libraries ... overwrite if they already exist
 
 EXAMPLES
    $(basename $0) -h
    $(basename $0) 3.2.9
+   $(basename $0) -f 3.2.9
 
 HELP
 }
 
-while getopts "h" OPT ; do
+forceOption=""
+while getopts "hf" OPT ; do
   case "$OPT" in
     h) usage; exit 0;;
+    f) forceOption=" -f ";;
     *) usage; exit_1_banner "Uknown option";;
   esac
 done
@@ -44,7 +48,7 @@ pushd $GS_CLIENT_DEV_CLIENTS >& /dev/null
   for clientName in $(find . -maxdepth 1 -type d)
   do
     if [ "$clientName" != "." ] ; then
-      ${GS_CLIENT_DEV_CLIENTS}/$clientName/installClientGciLibraries $vers
+      ${GS_CLIENT_DEV_CLIENTS}/$clientName/installClientGciLibraries $forceOption $vers
     fi
   done
 
